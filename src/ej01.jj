@@ -1,0 +1,138 @@
+PARSER_BEGIN(Ejemplo01Sintaxis)
+
+public class Ejemplo01Sintaxis {
+    public static void main(String[] args) {
+        try {
+            new Ejemplo01Sintaxis(new java.io.StringReader(args[0])).S();
+            System.out.println("La sintaxis es CORRECTA" );
+        } catch (Throwable e) {
+            // Catching Throwable is ugly but JavaCC throws Error objects!
+            System.out.println("Hay un ERROR en la sintaxis 2: " + e.getMessage());
+        }
+    }
+}
+
+PARSER_END(Ejemplo01Sintaxis)
+
+/* Reglas Lexicas */
+SKIP:  { " " | "\t" | "\n" | "\r"  }
+TOKEN: { "(" {System.out.println("Token -> "+image);}|
+ ")" {System.out.println("Token -> "+image);}|
+ "+" {System.out.println("Token -> "+image);}| 
+ "*" {System.out.println("Token -> "+image);}| 
+ "{" {System.out.println("Token -> "+image);}|
+ "}" {System.out.println("Token -> "+image);}|
+ "," {System.out.println("Token -> "+image);}|
+ "'" {System.out.println("Token -> "+image);}|
+ "author=" {System.out.println("Token -> "+image);}|
+ "title=" {System.out.println("Token -> "+image);}|
+ "journal=" {System.out.println("Token -> "+image);}|
+ "page=" {System.out.println("Token -> "+image);}|
+ "year=" {System.out.println("Token -> "+image);}|
+ "month=" {System.out.println("Token -> "+image);}|
+<ARTICLE: ("@"["A"-"a"]"rticle")> {System.out.println("Article -> "+image);} | 
+<BOOK: ("@"["B"-"b"]"ook")> {System.out.println("Book -> "+image);} | 
+<BOOKLET: ("@"["B"-"b"]"ooklet")> {System.out.println("Booklet -> "+image);} | 
+<CONFERENCE: ("@"["C"-"c"]"onference")> {System.out.println("Booklet -> "+image);} |
+<INBOOK: ("@"["I"-"i"]"nbook")> {System.out.println("Inbook -> "+image);} |
+<INCOLLECTION: ("@"["I"-"i"]"ncollection")> {System.out.println("Incollection -> "+image);} |
+<INPROCEEDINGS: ("@"["I"-"i"]"nproceedings")> {System.out.println("Inproceedings -> "+image);} |
+<MANUAL: ("@"["M"-"m"]"anual")> {System.out.println("Manual -> "+image);} |
+<MASTERSTHESIS: ("@"["M"-"m"]"astersthesis")> {System.out.println("Mastersthesis -> "+image);} |
+<MISC: ("@"["M"-"m"]"isc")> {System.out.println("Misc -> "+image);} |
+<PHDTHESIS: ("@"["P"-"p"]"hdthesis")> {System.out.println("Phdthesis -> "+image);} |
+<PROCEEDINGS: ("@"["P"-"p"]"roceedings")> {System.out.println("Proceedings -> "+image);} |
+<TECHREPORT: ("@"["T"-"t"]"echreport")> {System.out.println("Techreport -> "+image);} |
+<UNPUBLISHED: ("@"["U"-"u"]"npublished")> {System.out.println("Unpublished -> "+image);} |
+<ETIQUETA: (["A"-"Z","a"-"z","0"-"9"," "])+> {System.out.println("Etiqueta -> "+image);} |
+<AUTHOR: "author=" "'"(["A"-"Z","a"-"z"," ","."])+"'"> {System.out.println("Author -> "+image);} |
+<EDITOR: "editor=" "'"(["A"-"Z","a"-"z"," ","."])+"'"> {System.out.println("Editor -> "+image);} |
+<TITLE: "title=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Title -> "+image);} |
+<PUBLISHER: "publisher=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Publisher -> "+image);} |
+<JOURNAL: "journal=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Journal -> "+image);} |
+<YEAR: "year=" "'"(["0"-"9"]){4}"'">  {System.out.println("Year -> "+image);} |
+<VOLUME: "volume=" "'"(["0"-"9"])+"'"> {System.out.println("Volume -> "+image);} |
+<NUMBER: "number=" "'"(["0"-"9"])+"'"> {System.out.println("Number -> "+image);} |
+<EDITION: "edition=" "'"(["0"-"9"])+"'"> {System.out.println("Edition -> "+image);} |
+<PAGES: "pages=" "'"(["0"-"9"])+"--"(["0"-"9"])+"'"> {System.out.println("Pages -> "+image);} |
+<SERIES: "series=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Series -> "+image);} |
+<ADDRESS: "address=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Address -> "+image);} |
+<HOWPUBLISHED: "howpublished=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Howpublished -> "+image);} |
+<BOOKTITTLE: "booktittle=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("booktittle -> "+image);} |
+<ORGANIZATION: "organization=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("organization -> "+image);} |
+<TYPE: "type=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Type -> "+image);} |
+<CHAPTER: "chapter=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Chapter -> "+image);} |
+<SCHOOL: "school=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("School -> "+image);} |
+<INSTITUTION: "institution=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("Institution -> "+image);} |
+<NOTE: "note=" "'"(["A"-"Z","a"-"z","0"-"9"," "])+"'"> {System.out.println("note -> "+image);} |
+<MONTH: "month=" "'"(["A"-"Z","a"-"z","0"-"9"])+"'"> {System.out.println("Month -> "+image);} 
+ }
+
+/* Reglas Sintactivas */
+void S(): {} { Elemento()("," Elemento())*  }
+void Elemento(): {} { (Article() | Book() | Booklet() | Conference() | Inbook() | Incollection() | Inproceedings() | Manual() | Mastersthesis() | Misc() | Phdthesis() | Proceedings() | Techreport() | Unpublished())  }
+void Article(): {} { <ARTICLE>"{"SentenciaArticle()"}"   }
+void Book(): {} { <BOOK>"{"SentenciaBook()"}"   }
+void Booklet(): {} { <BOOKLET>"{"SentenciaBooklet()"}"   }
+void Conference(): {} { <CONFERENCE>"{"SentenciaConference()"}"   }
+void Inbook(): {} { <INBOOK>"{"SentenciaInbook()"}"   }
+void Incollection(): {} { <INCOLLECTION>"{"SentenciaIncollection()"}"   }
+void Inproceedings(): {} { <INPROCEEDINGS>"{"SentenciaInproceedings()"}"   }
+void Manual(): {} { <MANUAL>"{"SentenciaManual()"}"   }
+void Mastersthesis(): {} { <MASTERSTHESIS>"{"SentenciaMastersthesis()"}"   }
+void Misc(): {} { <MISC>"{"SentenciaMisc()"}"   }
+void Phdthesis(): {} { <PHDTHESIS>"{"SentenciaPhdthesis()"}"   }
+void Proceedings(): {} { <PROCEEDINGS>"{"SentenciaProceedings()"}"   }
+void Techreport(): {} { <TECHREPORT>"{"SentenciaTechreport()"}"   }
+void Unpublished(): {} { <UNPUBLISHED>"{"SentenciaUnpublished()"}"   }
+void SentenciaArticle(): {} {  AtributoArticle()("," AtributoArticle())*  }
+void AtributoArticle():{} { (Etiqueta() | Author() | Title() | Journal() | Year() | Volume() | Number() | Pages() | Month())  }
+void SentenciaBook(): {} {  AtributoBook()("," AtributoBook())*  }
+void AtributoBook():{} { (Etiqueta() | Author() | Editor() | Title() | Publisher() | Series() | Journal() | Edition() | Year() | Volume() | Number() | Pages() | Month() | Address())  }
+void SentenciaBooklet(): {} {  AtributoBooklet()("," AtributoBooklet())*  }
+void AtributoBooklet():{} { (Etiqueta() | Author() | Title() | Howpublished() | Address() | Year() | Month())  }
+void SentenciaConference(): {} {  AtributoConference()("," AtributoConference())*  }
+void AtributoConference():{} { (Etiqueta() | Author() | Title() | Year() | Booktittle() | Editor() | Volume() | Number() | Series() | Publisher() | Address() | Organization() | Pages() | Month())  }
+void SentenciaInbook(): {} {  AtributoInbook()("," AtributoInbook())*  }
+void AtributoInbook():{} { (Etiqueta() | Author() | Title() | Journal() | Editor() | Year() | Volume() | Publisher() | Address() | Chapter() | Edition() | Series() | Type() | Number() | Pages() | Month())  }
+void SentenciaIncollection(): {} {  AtributoIncollection()("," AtributoIncollection())*  }
+void AtributoIncollection():{} { (Etiqueta() | Author() | Title() | Journal() | Booktittle() | Editor() | Type() | Chapter() | Address() | Edition() | Series() | Publisher() | Year() | Volume() | Number() | Pages() | Month())  }
+void SentenciaInproceedings(): {} {  AtributoInproceedings()("," AtributoInproceedings())*  }
+void AtributoInproceedings():{} { (Etiqueta() | Author() | Title() | Booktittle() | Editor() | Address() | Series() | Publisher() | Organization() | Year() | Volume() | Number() | Pages() | Month())  }
+void SentenciaManual(): {} {  AtributoManual()("," AtributoManual())*  }
+void AtributoManual():{} { (Etiqueta() | Author() | Title() | Organization() | Address() | Year() | Edition() | Number() | Pages() | Month())  }
+void SentenciaMastersthesis(): {} {  AtributoMastersthesis()("," AtributoMastersthesis())*  }
+void AtributoMastersthesis():{} { (Etiqueta() | Author() | Title() | Address() | School() | Type() |  Year() |  Month())  }
+void SentenciaMisc(): {} {  AtributoMisc()("," AtributoMisc())*  }
+void AtributoMisc():{} { (Etiqueta() | Author() | Title() | Howpublished() | Year() | Month())  }
+void SentenciaPhdthesis(): {} {  AtributoPhdthesis()("," AtributoPhdthesis())*  }
+void AtributoPhdthesis():{} { (Etiqueta() | Author() | Title() | School() | Type() | Address() | Year() | Month())  }
+void SentenciaProceedings(): {} {  AtributoProceedings()("," AtributoProceedings())*  }
+void AtributoProceedings():{} { (Etiqueta() | Author() | Title() | Editor() | Booktittle() | Series() | Address() | Publisher() | Organization() | Year() | Volume() | Number() | Month())  }
+void SentenciaTechreport(): {} {  AtributoTechreport()("," AtributoTechreport())*  }
+void AtributoTechreport():{} { (Etiqueta() | Author() | Title() | Year() | Type() | Institution() | Address() | Number() | Month())  }
+void SentenciaUnpublished(): {} {  AtributoUnpublished()("," AtributoUnpublished())*  }
+void AtributoUnpublished():{} { (Etiqueta() | Author() | Note() | Title() | Year() | Month())  }
+
+void Etiqueta():{} { <ETIQUETA>}
+void Author():{} { <AUTHOR> }
+void Editor():{} { <EDITOR> }
+void Title():{} { <TITLE> }
+void Publisher():{} { <PUBLISHER> }
+void Journal():{} { <JOURNAL> }
+void Year():{} { <YEAR> }
+void Volume():{} { <VOLUME> }
+void Number():{} { <NUMBER> }
+void Pages():{} { <PAGES> }
+void Month():{} { <MONTH> }
+void Series():{} { <SERIES> }
+void Address():{} { <ADDRESS> }
+void Edition():{} { <EDITION> }
+void Howpublished():{} { <HOWPUBLISHED> }
+void Booktittle():{} { <BOOKTITTLE> }
+void Organization():{} { <ORGANIZATION> }
+void Type():{} { <TYPE> }
+void Chapter():{} { <CHAPTER> }
+void School():{} { <SCHOOL> }
+void Institution():{} { <INSTITUTION> }
+void Note():{} { <NOTE> }
