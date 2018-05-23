@@ -8,6 +8,8 @@ public class moneda {
     private int valorpeso;
     private int valordolar;
     
+
+    
   //Constructor
     public moneda() {
         
@@ -19,6 +21,7 @@ public class moneda {
         this.valor = valor;
         this.dia = dia;
     }
+    
     
 
 	public int getValorpeso() {
