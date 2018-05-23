@@ -5,16 +5,37 @@ public class moneda {
     private String moneda;
     private int valor;
     private String dia;
+    private int valorpeso;
+    private int valordolar;
     
- 
-    //Constructor
+  //Constructor
+    public moneda() {
+        
+    }
+    
     public moneda(String conversion, String moneda, int valor, String dia) {
         this.conversion = conversion;
         this.moneda = moneda;
         this.valor = valor;
         this.dia = dia;
     }
+    
 
+	public int getValorpeso() {
+		return valorpeso;
+	}
+
+	public void setValorpeso(int valorpeso) {
+		this.valorpeso = valorpeso;
+	}
+
+	public int getValordolar() {
+		return valordolar;
+	}
+
+	public void setValordolar(int valordolar) {
+		this.valordolar = valordolar;
+	}
 
 	public String getConversion() {
 		return conversion;
